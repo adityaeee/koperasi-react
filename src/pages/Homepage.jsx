@@ -1,7 +1,7 @@
 import React from "react";
 import CardHomePage from "../components/CardHomePage";
 import AboutUs from "../components/AboutUs";
-import Count from "./Count";
+import Count from "./HookExample";
 
 export default function Homepage() {
     return (
@@ -9,7 +9,7 @@ export default function Homepage() {
             <section className="container">
                 <div className="content__container">
                     <h1>
-                        Enigma Koperasi
+                        Koperasi Nusantara
                         <br />
                         <span className="heading__1">
                             Layanan Finansial Pilihan
@@ -18,11 +18,11 @@ export default function Homepage() {
                         <span className="heading__2">Utama Kita Semua</span>
                     </h1>
                     <p>
-                        Koperasi Enigma adalah sebuah koperasi yang berdedikasi
-                        tinggi pada pemberdayaan ekonomi masyarakat. Didirikan
-                        pada tahun 2010, kami telah berkomitmen untuk memberikan
-                        solusi finansial yang inovatif dan terpercaya kepada
-                        anggota kami.
+                        Koperasi Nusantara adalah sebuah koperasi yang
+                        berdedikasi tinggi pada pemberdayaan ekonomi masyarakat.
+                        Didirikan pada tahun 2010, kami telah berkomitmen untuk
+                        memberikan solusi finansial yang inovatif dan terpercaya
+                        kepada anggota kami.
                     </p>
 
                     <form action="">
@@ -89,7 +89,6 @@ export default function Homepage() {
                     desc="Itaque aperiam ratione . Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque aperiam ratione aspernatur magnam tempore iure voluptas qui veniam unde dicta. Deleniti nostrum veritatis natus dolor."
                 />
             </div>
-            <Count />
         </>
     );
 }

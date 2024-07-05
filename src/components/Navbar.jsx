@@ -1,13 +1,31 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { logout } from "../redux/features/authSlice";
 
 export default function () {
+    const user = useSelector((state) => state.auth.user);
+    const isLoggedIn = useSelector((state) => {
+        state.auth.isLoggedIn;
+    });
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("user");
+        dispatch(logout);
+        navigate("login");
+    };
     return (
         <div>
             <nav className="navbar navbar-expand-lg fixed-top">
                 <div className="container-fluid">
-                    <a className="navbar-brand me-auto" href="/">
-                        Koperasi Korporat
-                    </a>
+                    <Link to="/" className="navbar-brand me-auto">
+                        Koperasi Nusantara
+                    </Link>
                     <button
                         className="navbar-toggler pe-8"
                         type="button"
@@ -41,25 +59,43 @@ export default function () {
                         <div className="offcanvas-body">
                             <ul className="navbar-nav justify-content-center flex-grow-1 pe-3">
                                 <li className="nav-item">
-                                    <a
+                                    <Link
                                         className="nav-link mx-lg-2 active"
                                         aria-current="page"
-                                        href="/"
+                                        to="/"
                                     >
                                         Home
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link mx-lg-2" href="/">
+                                    <Link
+                                        className="nav-link mx-lg-2"
+                                        to="/contact"
+                                    >
                                         Contact
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <a href="/login" className="login-button">
-                        Login
-                    </a>
+                    {localStorage.getItem("isLoggedIn") ? (
+                        <div>
+                            <span className="navbar-text me-3">
+                                Hello, {user?.name}
+                            </span>
+                            <Link
+                                to="/login"
+                                className="login-button"
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </Link>
+                        </div>
+                    ) : (
+                        <Link to="/login" className="login-button">
+                            Login
+                        </Link>
+                    )}
                 </div>
             </nav>
         </div>
