@@ -4,21 +4,30 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { logout } from "../redux/features/authSlice";
+import { useAuth } from "../context/AuthContext";
 
 export default function () {
-    const user = useSelector((state) => state.auth.user);
-    const isLoggedIn = useSelector((state) => {
-        state.auth.isLoggedIn;
-    });
+    // const user = useSelector((state) => state.auth.user);
+    // const isLoggedIn = useSelector((state) => {
+    //     state.auth.isLoggedIn;
+    // });
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    // this with redux
+    // const handleLogout = () => {
+    //     localStorage.removeItem("isLoggedIn");
+    //     localStorage.removeItem("user");
+    //     dispatch(logout);
+    //     navigate("login");
+    // };
+
+    // this with context
+    const { user, logout } = useAuth();
     const handleLogout = () => {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("user");
-        dispatch(logout);
-        navigate("login");
+        logout();
     };
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg fixed-top">

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { setAuthState } from "../redux/features/authSlice";
 import animation from "../assets/animations/animation-login.json";
 import Lottie from "lottie-react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -13,18 +14,31 @@ export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    // handle login with redux state management
+    // const handleLogin = (e) => {
+    //     e.preventDefault();
+    //     if (username == "aditya" && password == "12345") {
+    //         dispatch(
+    //             setAuthState({ isLoggedIn: true, user: { name: username } })
+    //         );
+
+    //         localStorage.setItem("isLoggedIn", "true");
+    //         localStorage.setItem("user", JSON.stringify({ name: username }));
+    //         navigate("/");
+    //     } else {
+    //         alert("Username or password is not valid");
+    //     }
+    // };
+
+    // Handle login with context state management
+    const { isLoggedIn, login } = useAuth();
     const handleLogin = (e) => {
         e.preventDefault();
-        if (username == "aditya" && password == "12345") {
-            dispatch(
-                setAuthState({ isLoggedIn: true, user: { name: username } })
-            );
-
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("user", JSON.stringify({ name: username }));
+        if (username == "alex" && password == "jhiro") {
+            login(username);
             navigate("/");
         } else {
-            alert("Username or password is not valid");
+            alert("Duarrr!!!!!!!!!!!!!!");
         }
     };
 
