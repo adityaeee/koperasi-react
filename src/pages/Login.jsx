@@ -1,9 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setAuthState } from "../redux/features/authSlice";
 import animation from "../assets/animations/animation-login.json";
 import Lottie from "lottie-react";
 import { useAuth } from "../context/AuthContext";
@@ -11,34 +8,25 @@ import { useAuth } from "../context/AuthContext";
 export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const dispatch = useDispatch();
+    const [errorMessage, setErrorMessage] = useState("");
+    const { isLoggedIn, login } = useAuth();
     const navigate = useNavigate();
 
-    // handle login with redux state management
-    // const handleLogin = (e) => {
-    //     e.preventDefault();
-    //     if (username == "aditya" && password == "12345") {
-    //         dispatch(
-    //             setAuthState({ isLoggedIn: true, user: { name: username } })
-    //         );
-
-    //         localStorage.setItem("isLoggedIn", "true");
-    //         localStorage.setItem("user", JSON.stringify({ name: username }));
-    //         navigate("/");
-    //     } else {
-    //         alert("Username or password is not valid");
-    //     }
-    // };
-
-    // Handle login with context state management
-    const { isLoggedIn, login } = useAuth();
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (username == "alex" && password == "jhiro") {
-            login(username);
-            navigate("/");
-        } else {
-            alert("Duarrr!!!!!!!!!!!!!!");
+        try {
+            await login(username, password);
+            console.log("🚀 ~ handleLogin ~ password:", password);
+            console.log("🚀 ~ handleLogin ~ username:", username);
+
+            if (isLoggedIn) {
+                navigate("/");
+                console.log("🚀 ~ handleLogin ~ success:", success);
+            } else {
+                setErrorMessage("Invalid username or password");
+            }
+        } catch (error) {
+            setErrorMessage(error.message);
         }
     };
 

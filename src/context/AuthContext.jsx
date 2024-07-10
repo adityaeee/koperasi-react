@@ -12,7 +12,7 @@ const initialState = {
 };
 
 const authReducer = (state, action) => {
-    switch (key) {
+    switch (action.type) {
         case "LOGIN":
             return {
                 ...state,
@@ -33,7 +33,7 @@ const authReducer = (state, action) => {
 };
 
 export const AuthProvider = ({ children }) => {
-    const [authState, dispatch] = useReducer(authReducer, initialState);
+    const [state, dispatch] = useReducer(authReducer, initialState);
 
     const login = async (username, password) => {
         try {
@@ -41,10 +41,15 @@ export const AuthProvider = ({ children }) => {
                 username,
                 password,
             });
+
             const token = response.data;
+            const user = { name: "Adityae" };
             if (token) {
                 localStorage.setItem("token", token);
+                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("isLoggedIn", true);
                 dispatch({ type: "LOGIN", payload: token });
+                // return true;
             }
         } catch (error) {
             console.log("🚀 ~ login failed ~ error:", error);

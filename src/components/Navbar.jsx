@@ -23,7 +23,9 @@ export default function () {
     // };
 
     // this with context
-    const { user, logout } = useAuth();
+    let user = localStorage.getItem("user");
+    user = JSON.parse(user);
+    const { logout } = useAuth();
     const handleLogout = () => {
         logout();
     };
