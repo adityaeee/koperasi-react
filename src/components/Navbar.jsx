@@ -86,6 +86,14 @@ export default function () {
                                         Contact
                                     </Link>
                                 </li>
+                                <li className="nav-item">
+                                    <Link
+                                        className="nav-link mx-lg-2"
+                                        to="/employee"
+                                    >
+                                        Employee
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response && error.response.status === 401) {
-            window.location = "/signin";
+            window.location = "/";
         }
         return Promise.reject(error);
     }

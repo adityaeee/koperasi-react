@@ -18,6 +18,7 @@ import CounterWIthContext from "./context/CounterWithContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import AxiosPage from "./pages/AxiosPage.jsx";
 import Employee from "./pages/Employee.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
     {
@@ -54,7 +55,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "employee",
-                element: <Employee />,
+                element: (
+                    <ProtectedRoute>
+                        <Employee />
+                    </ProtectedRoute>
+                ),
             },
         ],
     },
